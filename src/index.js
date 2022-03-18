@@ -23,11 +23,25 @@ function checksExistsUserAccount(request, response, next) {
 }
 
 function checksCreateTodosUserAvailability(request, response, next) {
-  // Complete aqui
+  const {user} = request;
+  const todosQuantity = user.todos.length;
+
+  if(user.pro) {
+    next();
+  }
+
+  if(todosQuantity <= 9) {
+    next();
+  }
+
+  return response.json({error: "You can't create more than 10 todos with free plan!"});
 }
 
 function checksTodoExists(request, response, next) {
-  // Complete aqui
+  const {username} = request.headers;
+  const {id} = request.params;
+
+  
 }
 
 function findUserById(request, response, next) {
